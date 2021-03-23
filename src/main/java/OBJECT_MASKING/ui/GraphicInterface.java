@@ -5,6 +5,8 @@ import javax.swing.*;
 
 public class GraphicInterface extends JFrame {
 
+    // n - будем называть количество объектов ({i}n = 1, 2, ..., n)
+    // k - будем называть количество критериев ({Ck} = C1, C2, ..., Ck)
     private final JButton nextButton = new JButton("Далее");
     private final JLabel nLabel = new JLabel("Введите количество Объектов");
     private final JLabel kLabel = new JLabel("Введите количество Критериев");
