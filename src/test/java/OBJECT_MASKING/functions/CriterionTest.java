@@ -1,4 +1,4 @@
-package ru.profi.OBJECT_MASKING.functions;
+package OBJECT_MASKING.functions;
 
 import org.junit.Test;
 
