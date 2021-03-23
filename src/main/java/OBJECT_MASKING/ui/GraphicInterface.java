@@ -35,8 +35,8 @@ public class GraphicInterface extends JFrame {
                 if (objectNumber < 1 || criterionNumber < 1) {
                     throw new WrongNumberOfElementsException();
                 }
-                //this.dispose();
-                //new PointsWindow(count);
+                this.dispose();
+                new SimpleTableTest(objectNumber, criterionNumber);
             } catch (Exception exception) {
                 new ErrorWindow(this, exception);
             }
@@ -69,6 +69,7 @@ public class GraphicInterface extends JFrame {
                         .addComponent(nextButton))
 
         );
+
     }
 
     public static void main(String[] args) {
