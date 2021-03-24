@@ -1,6 +1,7 @@
 package OBJECT_MASKING.ui;
 
 
+import OBJECT_MASKING.exceptions.WrongNumberOfElementsException;
 import OBJECT_MASKING.functions.UnsortedToSorted;
 
 import javax.swing.*;
@@ -174,7 +175,7 @@ public class TableWindow extends JFrame {
                 resOneObject = 0;
             }
             ArrayList<Double> intervalsArray = new ArrayList<>();
-            for (int k = 0; k < countOfPriorities; k++){
+            for (int k = 0; k < countOfPriorities; k++) {
                 intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 0).toString()));
                 intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 1).toString()));
             }
@@ -190,25 +191,36 @@ public class TableWindow extends JFrame {
 
         });
         setButton.addActionListener(evt -> {
-            parameters.setEnabled(true);
-            criterion.setEnabled(true);
-            intervals.setEnabled(true);
-            okButton.setEnabled(true);
+            try {
+                parameters.setEnabled(true);
+                criterion.setEnabled(true);
+                intervals.setEnabled(true);
+                okButton.setEnabled(true);
 
-            maxNumber = Integer.parseInt(maxParameters.getText());
-            for (int i = 0; i < maxNumber; i++) {
-                model1.addColumn("      K " + (i + 1) + "     " + "(max)");
+                maxNumber = Integer.parseInt(maxParameters.getText());
+                if (maxNumber > countOfParameters) {
+                    throw new WrongNumberOfElementsException();
+                }
+                for (int i = 0; i < maxNumber; i++) {
+                    model1.addColumn("      K " + (i + 1) + "     " + "(max)");
+                }
+                for (int i = maxNumber; i < countOfParameters; i++) {
+                    model1.addColumn("      K " + (i + 1) + "     " + "(min)");
+                }
+
+                maxParameters.setEnabled(false);
+                TableWindow.setColumnsWidth(parameters);
+                TableWindow.setColumnsWidth(criterion);
+                TableWindow.setColumnsWidth(intervals);
+
+                setButton.setEnabled(false);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                new ErrorWindow(this, exception);
+                maxParameters.setEnabled(true);
+                setButton.setEnabled(true);
+                okButton.setEnabled(false);
             }
-            for (int i = maxNumber; i < countOfParameters; i++) {
-                model1.addColumn("      K " + (i + 1) + "     " + "(min)");
-            }
-            TableWindow.setColumnsWidth(parameters);
-            TableWindow.setColumnsWidth(criterion);
-            TableWindow.setColumnsWidth(intervals);
-
-            setButton.setEnabled(false);
-
-
 
 
         });
