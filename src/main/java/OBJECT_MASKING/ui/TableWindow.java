@@ -20,7 +20,7 @@ public class TableWindow extends JFrame {
     int maxNumber;
 
 
-    JButton ok = new JButton("Ок");
+    JButton okButton = new JButton("Далее");
     JButton setButton = new JButton("Задать");
     JTable parameters = new JTable(model1);
     JTable criterion = new JTable(model2);
@@ -75,7 +75,6 @@ public class TableWindow extends JFrame {
         intervals.setRowHeight(30);
 
 
-
         parameters.setIntercellSpacing(new Dimension(10, 10));
         parameters.setGridColor(Color.blue);
         parameters.setShowVerticalLines(true);
@@ -83,7 +82,7 @@ public class TableWindow extends JFrame {
         parameters.setEnabled(false);
         criterion.setEnabled(false);
         intervals.setEnabled(false);
-        ok.setEnabled(false);
+        okButton.setEnabled(false);
 
         compose();
         addButtonListeners();
@@ -106,8 +105,9 @@ public class TableWindow extends JFrame {
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(kLabel)
                         .addComponent(maxParameters)
-                        .addComponent(setButton)
-                        .addComponent(ok))
+                        .addComponent(setButton))
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(okButton))
         );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
@@ -118,8 +118,9 @@ public class TableWindow extends JFrame {
                 .addGroup(layout.createParallelGroup()
                         .addComponent(kLabel)
                         .addComponent(maxParameters)
-                        .addComponent(setButton)
-                        .addComponent(ok))
+                        .addComponent(setButton))
+                .addGroup(layout.createParallelGroup()
+                        .addComponent(okButton))
         );
 
 
@@ -150,7 +151,7 @@ public class TableWindow extends JFrame {
 
 
     private void addButtonListeners() {
-        ok.addActionListener(evt -> {
+        okButton.addActionListener(evt -> {
             ArrayList<Double> numdata = new ArrayList();
             ArrayList<Double> koeff = new ArrayList<>();
             ArrayList<Double> result = new ArrayList<>();
@@ -159,10 +160,9 @@ public class TableWindow extends JFrame {
                 for (int j = 1; j < model1.getColumnCount(); j++) {
                     numdata.add(Double.parseDouble(model1.getValueAt(i, j).toString()));
                     koeff.add(Double.parseDouble(model2.getValueAt(j - 1, 0).toString()));
-
                 }
                 numdata = TableWindow.maximize(numdata, maxNumber);
-                for (int count = 1; count < model1.getColumnCount(); count++){
+                for (int count = 1; count < model1.getColumnCount(); count++) {
                     resOneObject += (numdata.get(count - 1) * koeff.get(count - 1));
                 }
                 numdata.clear();
@@ -176,7 +176,7 @@ public class TableWindow extends JFrame {
             parameters.setEnabled(true);
             criterion.setEnabled(true);
             intervals.setEnabled(true);
-            ok.setEnabled(true);
+            okButton.setEnabled(true);
 
             maxNumber = Integer.parseInt(maxParameters.getText());
             for (int i = 0; i < maxNumber; i++) {
