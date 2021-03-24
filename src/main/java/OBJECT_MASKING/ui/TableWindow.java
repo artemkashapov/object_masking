@@ -9,60 +9,82 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class SimpleTableTest extends JFrame {
+public class TableWindow extends JFrame {
     static DefaultTableModel model1 = new javax.swing.table.DefaultTableModel();
     static DefaultTableModel model2 = new javax.swing.table.DefaultTableModel();
+    static DefaultTableModel model3 = new javax.swing.table.DefaultTableModel();
+
     int countOfParameters;
     int countOfObject;
+    int countOfPriorities;
+
+
     JButton ok = new JButton("Ок");
     JTable parameters = new JTable(model1);
     JTable criterion = new JTable(model2);
+    JTable intervals = new JTable(model3);
+
+    private final JLabel kLabel = new JLabel("Введите количество параметров для максимизации");
+    JTextField maxParameters = new JTextField();
+
+
     private final JScrollPane tableScrollPane1 = new JScrollPane(parameters);
     private final JScrollPane tableScrollPane2 = new JScrollPane(criterion);
+    private final JScrollPane tableScrollPane3 = new JScrollPane(intervals);
 
 
-    public SimpleTableTest(int countOfObject, int countOfParameters) {
+    public TableWindow(int countOfObject, int countOfParameters, int countOfPriorities) {
         super("Простой пример с JTable");
         this.countOfObject = countOfObject;
         this.countOfParameters = countOfParameters;
-        setLocationRelativeTo(null);
+        this.countOfPriorities = countOfPriorities;
 
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         model1.addColumn("  Объекты  ");
 
         for (int i = 0; i < countOfParameters; i++) {
-            model1.addColumn("      k " + (i + 1) + "     ");
+            model1.addColumn("      K " + (i + 1) + "     ");
         }
+        for (int i = 0; i < countOfObject; i++){
+                Vector<String> object = new Vector<>();
+                for (int j = 0; j < countOfParameters; j++) {
+                    object.add(" ");
+                }
+                    model1.addRow(object);
+                }
 
-        for (int i = 0; i < countOfObject; i++) {
-            Vector<String> object = new Vector<>();
-            for (int j = 0; j < countOfParameters; j++) {
-                object.add(" ");
-            }
-            model1.addRow(object);
-
-        }
-
-
-        Vector<String> vectorCtriteries = new Vector<>();
+        Vector<String> vectorCriteria = new Vector<>();
         for (int i = 0; i < countOfParameters; i++) {
-            vectorCtriteries.add(" ");
+            vectorCriteria.add(" ");
         }
-        model2.addColumn("Значимости критериев", vectorCtriteries);
+        model2.addColumn("Значимости критериев", vectorCriteria);
+
+
+        Vector<String> vectorIntervals = new Vector<>();
+        for (int i = 0; i < countOfPriorities; i++){
+            vectorIntervals.add(" ");
+        }
+        model3.addColumn("Левая граница", vectorIntervals);
+        model3.addColumn("Правая граница", vectorIntervals);
+
 
 
         parameters.setRowHeight(30);
-
         criterion.setRowHeight(30);
-        SimpleTableTest.setColumnsWidth(parameters);
-        SimpleTableTest.setColumnsWidth(criterion);
+        intervals.setRowHeight(30);
+
+        TableWindow.setColumnsWidth(parameters);
+        TableWindow.setColumnsWidth(criterion);
+        TableWindow.setColumnsWidth(intervals);
+
         parameters.setIntercellSpacing(new Dimension(10, 10));
         parameters.setGridColor(Color.blue);
         parameters.setShowVerticalLines(true);
 
         compose();
         addButtonListeners();
-
 
         setSize(650, 300);
         setVisible(true);
@@ -75,11 +97,15 @@ public class SimpleTableTest extends JFrame {
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
-                .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup()
                         .addComponent(tableScrollPane1)
                         .addGap(20)
                         .addComponent(tableScrollPane2)
+                        .addComponent(tableScrollPane3)
                 )
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(kLabel)
+                        .addComponent(maxParameters))
                 .addComponent(ok)
         );
 
@@ -132,6 +158,6 @@ public class SimpleTableTest extends JFrame {
     }
 
     public static void main(String[] args) {
-        new SimpleTableTest(3, 5);
+        new TableWindow(3, 5, 4);
     }
 }

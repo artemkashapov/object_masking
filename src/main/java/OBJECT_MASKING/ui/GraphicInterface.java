@@ -39,7 +39,7 @@ public class GraphicInterface extends JFrame {
                     throw new WrongNumberOfElementsException();
                 }
                 this.dispose();
-                new SimpleTableTest(objectNumber, criterionNumber);
+                new TableWindow(objectNumber, criterionNumber, priorityNumber);
             } catch (Exception exception) {
                 new ErrorWindow(this, exception);
             }
