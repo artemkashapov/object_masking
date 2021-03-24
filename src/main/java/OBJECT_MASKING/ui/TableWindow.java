@@ -103,7 +103,8 @@ public class TableWindow extends JFrame {
                         .addComponent(tableScrollPane3))
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(kLabel)
-                        .addComponent(maxParameters)
+                        .addComponent(maxParameters))
+                .addGroup(layout.createSequentialGroup()
                         .addComponent(ok))
         );
 
@@ -114,7 +115,8 @@ public class TableWindow extends JFrame {
                         .addComponent(tableScrollPane3))
                 .addGroup(layout.createParallelGroup()
                         .addComponent(kLabel)
-                        .addComponent(maxParameters)
+                        .addComponent(maxParameters))
+                .addGroup(layout.createParallelGroup()
                         .addComponent(ok))
         );
 
@@ -137,9 +139,9 @@ public class TableWindow extends JFrame {
         }
     }
 
-    public static ArrayList<Double> maximize(ArrayList<Double> array, int maxNumber){
-        for (int i = maxNumber; i < array.size(); i++){
-            array.set(i, -1/array.get(i));
+    public static ArrayList<Double> maximize(ArrayList<Double> array, int maxNumber) {
+        for (int i = maxNumber; i < array.size(); i++) {
+            array.set(i, -1 / array.get(i));
         }
         return array;
     }
