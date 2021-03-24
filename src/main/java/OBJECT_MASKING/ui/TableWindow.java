@@ -2,6 +2,8 @@ package OBJECT_MASKING.ui;
 
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
@@ -171,6 +173,12 @@ public class TableWindow extends JFrame {
                 result.add(resOneObject);
                 resOneObject = 0;
             }
+            ArrayList<Double> intervalsArray = new ArrayList<>();
+            for (int k = 0; k < countOfPriorities; k++){
+                intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 0).toString()));
+                intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 1).toString()));
+            }
+            System.out.println(intervalsArray);
             System.out.println(result);
         });
         setButton.addActionListener(evt -> {
@@ -193,6 +201,21 @@ public class TableWindow extends JFrame {
             setButton.setEnabled(false);
 
         });
+        /*
+        parameters.getModel().addTableModelListener(e -> {
+            if (parameters.getSelectedRow()>=0) {
+                try {
+                    if (parameters.getSelectedColumn()==1){
+
+                        parameters.setValueAt("VALUE", parameters.getSelectedRow(), 2);
+                    }
+                } catch (ArrayIndexOutOfBoundsException ee){
+                    ee.printStackTrace();
+                }
+            }
+        });
+
+         */
 
     }
 
