@@ -22,7 +22,7 @@ public class SimpleTableTest extends JFrame {
 
 
     public SimpleTableTest(int countOfObject, int countOfParameters) {
-        super("Простой пример с JTable");
+        super("Параметры задачи");
         this.countOfObject = countOfObject;
         this.countOfParameters = countOfParameters;
         setLocationRelativeTo(null);
