@@ -1,14 +1,15 @@
 package OBJECT_MASKING.ui;
 
 
+import OBJECT_MASKING.functions.UnsortedToSorted;
+
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Vector;
 
 public class TableWindow extends JFrame {
@@ -179,6 +180,14 @@ public class TableWindow extends JFrame {
             }
             System.out.println(intervalsArray);
             System.out.println(result);
+
+            UnsortedToSorted data = new UnsortedToSorted(result, intervalsArray);
+
+            data.fullSort();
+            System.out.println(Arrays.toString(data.getNumVector()));
+            System.out.println(Arrays.toString(data.getPriorities()));
+            System.out.println(Arrays.toString(data.getSumVector()));
+
         });
         setButton.addActionListener(evt -> {
             parameters.setEnabled(true);
@@ -198,6 +207,9 @@ public class TableWindow extends JFrame {
             TableWindow.setColumnsWidth(intervals);
 
             setButton.setEnabled(false);
+
+
+
 
         });
         /*

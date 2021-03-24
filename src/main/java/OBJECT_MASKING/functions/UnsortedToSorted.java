@@ -1,21 +1,26 @@
 package OBJECT_MASKING.functions;
 
+import java.util.ArrayList;
+
 public class UnsortedToSorted {
     private final int[] numVector;
     private final double[] sumVector;
     private double[] intervalVector;
     private int[] priorities;
 
-    public UnsortedToSorted(double[] sumVector, double[] intervalVector) {
-        this.sumVector = new double[sumVector.length];
-        this.numVector = new int[sumVector.length];
-        this.intervalVector = new double[intervalVector.length];
-        for (int i = 0; i < sumVector.length; i++) {
+    public UnsortedToSorted(ArrayList<Double> sumVector, ArrayList<Double> intervalVector) {
+
+        this.sumVector = new double[sumVector.size()];
+        this.numVector = new int[sumVector.size()];
+        this.intervalVector = new double[intervalVector.size()];
+        for (int i = 0; i < sumVector.size(); i++) {
             this.numVector[i] = i + 1;
-            this.sumVector[i] = sumVector[i];
+            this.sumVector[i] = sumVector.get(i);
         }
 
-        System.arraycopy(intervalVector, 0, this.intervalVector, 0, intervalVector.length);
+        for (int i = 0; i < intervalVector.size(); i++) {
+            this.intervalVector[i] = intervalVector.get(i);
+        }
     }
 
     public UnsortedToSorted(double[] sumVector) {

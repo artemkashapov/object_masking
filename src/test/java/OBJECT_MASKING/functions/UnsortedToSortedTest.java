@@ -20,9 +20,9 @@ public class UnsortedToSortedTest {
         return new UnsortedToSorted(s);
     }
 
-    private UnsortedToSorted getElems1(double[] s, double[] ints) {
-        return new UnsortedToSorted(s, ints);
-    }
+    //private UnsortedToSorted getElems1(double[] s, double[] ints) {
+    //return new UnsortedToSorted(s, ints);
+    // }
 
     @Test
     public void testBubbleSort() {
@@ -61,27 +61,27 @@ public class UnsortedToSortedTest {
 
     }
 
-    @Test
-    public void testIntervalSort() {
-        UnsortedToSorted ints = getElems1(s1, i1);
+    //  @Test
+    //public void testIntervalSort() {
+    //UnsortedToSorted ints = getElems1(s1, i1);
 
-        System.out.println(Arrays.toString(ints.getIntervalVector()));
+    //System.out.println(Arrays.toString(ints.getIntervalVector()));
 
-        ints.intervalSort();
-        System.out.println(Arrays.toString(ints.getIntervalVector()));
-    }
+    //ints.intervalSort();
+    //System.out.println(Arrays.toString(ints.getIntervalVector()));
+    //}
 
-    @Test
-    public void testFullTest() {
-        UnsortedToSorted ex1 = getElems1(Ko, intervals);
-        //System.out.println(Arrays.toString(ex1.getNumVector()));
-        //System.out.println(Arrays.toString(ex1.getSumVector()));
-        //System.out.println(Arrays.toString(ex1.getIntervalVector()));
+    //@Test
+    //public void testFullTest() {
+    // UnsortedToSorted ex1 = getElems1(Ko, intervals);
+    //System.out.println(Arrays.toString(ex1.getNumVector()));
+    //System.out.println(Arrays.toString(ex1.getSumVector()));
+    //System.out.println(Arrays.toString(ex1.getIntervalVector()));
 
-        ex1.fullSort();
-        System.out.println(Arrays.toString(ex1.getNumVector()));
-        System.out.println(Arrays.toString(ex1.getPriorities()));
-        System.out.println(Arrays.toString(ex1.getSumVector()));
+    //ex1.fullSort();
+    // System.out.println(Arrays.toString(ex1.getNumVector()));
+    // System.out.println(Arrays.toString(ex1.getPriorities()));
+    //.out.println(Arrays.toString(ex1.getSumVector()));
 
-    }
+    //}
 }
