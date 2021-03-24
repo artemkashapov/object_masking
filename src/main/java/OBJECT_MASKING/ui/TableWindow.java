@@ -156,38 +156,42 @@ public class TableWindow extends JFrame {
 
     private void addButtonListeners() {
         okButton.addActionListener(evt -> {
-            ArrayList<Double> numdata = new ArrayList();
-            ArrayList<Double> koeff = new ArrayList<>();
-            ArrayList<Double> result = new ArrayList<>();
-            double resOneObject = 0;
-            for (int i = 0; i < model1.getRowCount(); i++) {
-                for (int j = 1; j < model1.getColumnCount(); j++) {
-                    numdata.add(Double.parseDouble(model1.getValueAt(i, j).toString()));
-                    koeff.add(Double.parseDouble(model2.getValueAt(j - 1, 0).toString()));
+            try {
+                ArrayList<Double> numdata = new ArrayList();
+                ArrayList<Double> koeff = new ArrayList<>();
+                ArrayList<Double> result = new ArrayList<>();
+                double resOneObject = 0;
+                for (int i = 0; i < model1.getRowCount(); i++) {
+                    for (int j = 1; j < model1.getColumnCount(); j++) {
+                        numdata.add(Double.parseDouble(model1.getValueAt(i, j).toString()));
+                        koeff.add(Double.parseDouble(model2.getValueAt(j - 1, 0).toString()));
+                    }
+                    numdata = TableWindow.maximize(numdata, maxNumber);
+                    for (int count = 1; count < model1.getColumnCount(); count++) {
+                        resOneObject += (numdata.get(count - 1) * koeff.get(count - 1));
+                    }
+                    numdata.clear();
+                    koeff.clear();
+                    result.add(resOneObject);
+                    resOneObject = 0;
                 }
-                numdata = TableWindow.maximize(numdata, maxNumber);
-                for (int count = 1; count < model1.getColumnCount(); count++) {
-                    resOneObject += (numdata.get(count - 1) * koeff.get(count - 1));
+                ArrayList<Double> intervalsArray = new ArrayList<>();
+                for (int k = 0; k < countOfPriorities; k++) {
+                    intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 0).toString()));
+                    intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 1).toString()));
                 }
-                numdata.clear();
-                koeff.clear();
-                result.add(resOneObject);
-                resOneObject = 0;
-            }
-            ArrayList<Double> intervalsArray = new ArrayList<>();
-            for (int k = 0; k < countOfPriorities; k++) {
-                intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 0).toString()));
-                intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 1).toString()));
-            }
-            System.out.println(intervalsArray);
-            System.out.println(result);
+                System.out.println(intervalsArray);
+                System.out.println(result);
 
-            UnsortedToSorted data = new UnsortedToSorted(result, intervalsArray);
+                UnsortedToSorted data = new UnsortedToSorted(result, intervalsArray);
 
-            data.fullSort();
-            System.out.println(Arrays.toString(data.getNumVector()));
-            System.out.println(Arrays.toString(data.getPriorities()));
-            System.out.println(Arrays.toString(data.getSumVector()));
+                data.fullSort();
+                System.out.println(Arrays.toString(data.getNumVector()));
+                System.out.println(Arrays.toString(data.getPriorities()));
+                System.out.println(Arrays.toString(data.getSumVector()));
+            } catch (Exception exception) {
+                new ErrorWindow(this, exception);
+            }
 
         });
         setButton.addActionListener(evt -> {
@@ -198,7 +202,7 @@ public class TableWindow extends JFrame {
                 okButton.setEnabled(true);
 
                 maxNumber = Integer.parseInt(maxParameters.getText());
-                if (maxNumber > countOfParameters) {
+                if (maxNumber > countOfParameters || maxNumber < 0) {
                     throw new WrongNumberOfElementsException();
                 }
                 for (int i = 0; i < maxNumber; i++) {
@@ -215,14 +219,11 @@ public class TableWindow extends JFrame {
 
                 setButton.setEnabled(false);
             } catch (Exception exception) {
-                exception.printStackTrace();
                 new ErrorWindow(this, exception);
                 maxParameters.setEnabled(true);
                 setButton.setEnabled(true);
                 okButton.setEnabled(false);
             }
-
-
         });
         /*
         parameters.getModel().addTableModelListener(e -> {
