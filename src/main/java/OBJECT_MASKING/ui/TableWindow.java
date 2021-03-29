@@ -5,6 +5,7 @@ import OBJECT_MASKING.exceptions.WrongNumberOfElementsException;
 import OBJECT_MASKING.functions.UnsortedToSorted;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
@@ -20,6 +21,11 @@ class MyTableModel extends DefaultTableModel {
         super();
         System.out.println("Inside myTableModel");
 
+    }
+
+    public void fireTableDataChanged() {
+        fireTableChanged(new TableModelEvent(this));
+        boolean flag = false;
     }
 
     public boolean isCellEditable(int row, int cols) {
@@ -203,6 +209,15 @@ public class TableWindow extends JFrame {
     private void addButtonListeners() {
         okButton.addActionListener(evt -> {
             try {
+                if (parameters.isEditing() ) {
+                    parameters.getCellEditor().stopCellEditing();
+                }
+                if (criterion.isEditing() ) {
+                    criterion.getCellEditor().stopCellEditing();
+                }
+                if (intervals.isEditing() ) {
+                    intervals.getCellEditor().stopCellEditing();
+                }
                 ArrayList<Double> numdata = new ArrayList();
                 ArrayList<Double> koeff = new ArrayList<>();
                 ArrayList<Double> result = new ArrayList<>();
@@ -226,7 +241,7 @@ public class TableWindow extends JFrame {
                     intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 0).toString()));
                     intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 1).toString()));
                 }
-
+                model1.fireTableDataChanged();
                 new ResultWindow(result, intervalsArray);
 
 
