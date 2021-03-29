@@ -1,5 +1,6 @@
 package OBJECT_MASKING.ui;
 
+import OBJECT_MASKING.exceptions.WrongIntervalsException;
 import OBJECT_MASKING.exceptions.WrongNumberOfElementsException;
 
 import javax.swing.*;
@@ -25,6 +26,11 @@ public class ErrorWindow extends JDialog {
         if (e instanceof WrongNumberOfElementsException) {
             return "Вы ввели неверное значение!";
         }
+
+        if (e instanceof WrongIntervalsException) {
+            return "Неверные интервалы!";
+        }
+
         if (e instanceof NullPointerException) {
             return "Что-то пошло не так...";
         }

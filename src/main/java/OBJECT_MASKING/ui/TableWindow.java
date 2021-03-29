@@ -1,6 +1,7 @@
 package OBJECT_MASKING.ui;
 
 
+import OBJECT_MASKING.exceptions.WrongIntervalsException;
 import OBJECT_MASKING.exceptions.WrongNumberOfElementsException;
 import OBJECT_MASKING.functions.UnsortedToSorted;
 
@@ -109,7 +110,6 @@ public class TableWindow extends JFrame {
          */
 
 
-
         Vector<String> vectorCriteria = new Vector<>();
         for (int i = 0; i < countOfParameters; i++) {
             vectorCriteria.add(" ");
@@ -143,7 +143,7 @@ public class TableWindow extends JFrame {
         compose();
         addButtonListeners();
 
-        setSize(650, 300);
+        setSize(750, 400);
         setVisible(true);
     }
 
@@ -209,13 +209,13 @@ public class TableWindow extends JFrame {
     private void addButtonListeners() {
         okButton.addActionListener(evt -> {
             try {
-                if (parameters.isEditing() ) {
+                if (parameters.isEditing()) {
                     parameters.getCellEditor().stopCellEditing();
                 }
-                if (criterion.isEditing() ) {
+                if (criterion.isEditing()) {
                     criterion.getCellEditor().stopCellEditing();
                 }
-                if (intervals.isEditing() ) {
+                if (intervals.isEditing()) {
                     intervals.getCellEditor().stopCellEditing();
                 }
                 ArrayList<Double> numdata = new ArrayList();
@@ -236,15 +236,25 @@ public class TableWindow extends JFrame {
                     result.add(resOneObject);
                     resOneObject = 0;
                 }
+
                 ArrayList<Double> intervalsArray = new ArrayList<>();
                 for (int k = 0; k < countOfPriorities; k++) {
                     intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 0).toString()));
                     intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 1).toString()));
                 }
+
                 model1.fireTableDataChanged();
+
+                double maxS = Collections.max(result);
+                double minS = Collections.min(result);
+                double maxI = Collections.max(intervalsArray);
+                double minI = Collections.min(intervalsArray);
+
+                if (maxS > maxI | minS < minI) {
+                    throw new WrongIntervalsException();
+                }
+
                 new ResultWindow(result, intervalsArray);
-
-
                 System.out.println(intervalsArray);
                 System.out.println(result);
 
@@ -314,6 +324,26 @@ public class TableWindow extends JFrame {
         });
 
 
+    }
+
+    public double getMax(double[] vector) {
+        double max = 0;
+        for (int i = 0; i < vector.length; i++) {
+            if (vector[i] > max) {
+                max = vector[i];
+            }
+        }
+        return max;
+    }
+
+    public double getMin(double[] vector) {
+        double min = getMax(vector);
+        for (int i = 0; i < vector.length; i++) {
+            if (vector[i] < min) {
+                min = vector[i];
+            }
+        }
+        return min;
     }
 
 }

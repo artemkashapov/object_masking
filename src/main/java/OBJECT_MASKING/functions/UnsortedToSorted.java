@@ -1,5 +1,8 @@
 package OBJECT_MASKING.functions;
 
+import OBJECT_MASKING.exceptions.WrongIntervalsException;
+import OBJECT_MASKING.exceptions.WrongNumberOfElementsException;
+
 import java.util.ArrayList;
 
 public class UnsortedToSorted {
@@ -63,11 +66,13 @@ public class UnsortedToSorted {
 
     public void intervalSort() {
         boolean sorted = false;
-        int tempInd;
         double temp;
         while (!sorted) {
             sorted = true;
             for (int i = 0; i < intervalVector.length - 1; i++) {
+                if (intervalVector[i] == intervalVector[i + 1]) {
+                    throw new WrongIntervalsException();
+                }
                 if (intervalVector[i] > intervalVector[i + 1]) {
                     temp = intervalVector[i];
                     intervalVector[i] = intervalVector[i + 1];
@@ -101,7 +106,6 @@ public class UnsortedToSorted {
         this.priorities = new int[priorityVector.length];
         System.arraycopy(priorityVector, 0, this.priorities, 0, priorityVector.length);
     }
-
 
     public double[] getSumVector() {
         return sumVector;
