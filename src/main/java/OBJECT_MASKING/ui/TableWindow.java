@@ -11,6 +11,7 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Vector;
 
 public class TableWindow extends JFrame {
@@ -77,6 +78,7 @@ public class TableWindow extends JFrame {
         parameters.setRowHeight(30);
         criterion.setRowHeight(30);
         intervals.setRowHeight(30);
+
 
 
         parameters.setIntercellSpacing(new Dimension(10, 10));
@@ -179,6 +181,7 @@ public class TableWindow extends JFrame {
                 intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 0).toString()));
                 intervalsArray.add(Double.parseDouble(model3.getValueAt(k, 1).toString()));
             }
+            Collections.sort(result);
             System.out.println(intervalsArray);
             System.out.println(result);
 
@@ -188,6 +191,7 @@ public class TableWindow extends JFrame {
             System.out.println(Arrays.toString(data.getNumVector()));
             System.out.println(Arrays.toString(data.getPriorities()));
             System.out.println(Arrays.toString(data.getSumVector()));
+            new ResultWindow(result, intervalsArray);
 
         });
         setButton.addActionListener(evt -> {
@@ -226,6 +230,9 @@ public class TableWindow extends JFrame {
         });
         /*
         parameters.getModel().addTableModelListener(e -> {
+            //for (int i = 0; i < countOfObject; i++){
+               // parameters.setValueAt(1, i, 0);
+         //  }
             if (parameters.getSelectedRow()>=0) {
                 try {
                     if (parameters.getSelectedColumn()==1){
@@ -239,6 +246,9 @@ public class TableWindow extends JFrame {
         });
 
          */
+
+
+
 
     }
 
