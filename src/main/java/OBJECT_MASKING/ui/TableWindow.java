@@ -155,26 +155,26 @@ public class TableWindow extends JFrame {
         layout.setAutoCreateContainerGaps(true);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                 .addGroup(layout.createSequentialGroup()
-                        .addComponent(tableScrollPane1)
-                        .addComponent(tableScrollPane2)
-                        .addComponent(tableScrollPane3))
-                .addGroup(layout.createSequentialGroup()
                         .addComponent(kLabel)
                         .addComponent(maxParameters)
                         .addComponent(setButton))
+                .addGroup(layout.createSequentialGroup()
+                        .addComponent(tableScrollPane1)
+                        .addComponent(tableScrollPane2)
+                        .addComponent(tableScrollPane3))
                 .addGroup(layout.createSequentialGroup()
                         .addComponent(okButton))
         );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(tableScrollPane1)
-                        .addComponent(tableScrollPane2)
-                        .addComponent(tableScrollPane3))
                 .addGroup(layout.createParallelGroup()
                         .addComponent(kLabel)
                         .addComponent(maxParameters)
                         .addComponent(setButton))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(tableScrollPane1)
+                        .addComponent(tableScrollPane2)
+                        .addComponent(tableScrollPane3))
                 .addGroup(layout.createParallelGroup()
                         .addComponent(okButton))
         );
@@ -324,26 +324,6 @@ public class TableWindow extends JFrame {
         });
 
 
-    }
-
-    public double getMax(double[] vector) {
-        double max = 0;
-        for (int i = 0; i < vector.length; i++) {
-            if (vector[i] > max) {
-                max = vector[i];
-            }
-        }
-        return max;
-    }
-
-    public double getMin(double[] vector) {
-        double min = getMax(vector);
-        for (int i = 0; i < vector.length; i++) {
-            if (vector[i] < min) {
-                min = vector[i];
-            }
-        }
-        return min;
     }
 
 }
