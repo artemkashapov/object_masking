@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class ResultWindow extends JDialog {
-    static DefaultTableModel resultModel = new javax.swing.table.DefaultTableModel();
+    private final DefaultTableModel resultModel = new javax.swing.table.DefaultTableModel();
 
     ArrayList<Double> result;
     ArrayList<Double> intervals;
 
     JTable resultTable = new JTable(resultModel);
-
-    private final JScrollPane tableScrollPanel = new JScrollPane(resultTable);
 
     public ResultWindow(ArrayList<Double> result, ArrayList<Double> intervals) {
         setSize(550, 200);
@@ -54,13 +52,13 @@ public class ResultWindow extends JDialog {
 
         resultTable.setRowHeight(30);
 
+        JScrollPane tableScrollPanel = new JScrollPane(resultTable);
         cp.add(tableScrollPanel);
         setModal(true);
         resultTable.setEnabled(false);
         setVisible(true);
 
     }
-
 
     public static Vector<String> toVector(double[] doubles) {
         Vector vector = new Vector(doubles.length);

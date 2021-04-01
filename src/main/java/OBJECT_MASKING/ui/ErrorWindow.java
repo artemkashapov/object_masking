@@ -5,7 +5,6 @@ import OBJECT_MASKING.exceptions.WrongNumberOfElementsException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class ErrorWindow extends JDialog {
 

@@ -270,7 +270,6 @@ public class TableWindow extends JFrame {
             } catch (Exception exception) {
                 new ErrorWindow(this, exception);
             }
-
         });
         setButton.addActionListener(evt -> {
             try {
@@ -306,8 +305,6 @@ public class TableWindow extends JFrame {
                 setButton.setEnabled(true);
                 okButton.setEnabled(false);
             }
-
-
         });
 
         resetButton.addActionListener(evt -> {
@@ -318,21 +315,6 @@ public class TableWindow extends JFrame {
             model3 = new javax.swing.table.DefaultTableModel();
 
         });
-
-        /*parameters.getModel().addTableModelListener(e -> {
-            if (parameters.getSelectedRow() >= 0) {
-                try {
-                    //if (parameters.getSelectedColumn()==1){
-
-
-                    //}
-                } catch (ArrayIndexOutOfBoundsException ee) {
-                    ee.printStackTrace();
-                }
-            }
-        });*/
-
-
     }
 
 }
