@@ -56,6 +56,7 @@ public class TableWindow extends JFrame {
 
     JButton okButton = new JButton("Далее");
     JButton setButton = new JButton("Задать");
+    JButton resetButton = new JButton("Новые данные");
     JTable parameters = new JTable(model1);
     JTable criterion = new JTable(model2);
     JTable intervals = new JTable(model3);
@@ -163,7 +164,8 @@ public class TableWindow extends JFrame {
                         .addComponent(tableScrollPane2)
                         .addComponent(tableScrollPane3))
                 .addGroup(layout.createSequentialGroup()
-                        .addComponent(okButton))
+                        .addComponent(okButton)
+                        .addComponent(resetButton))
         );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
@@ -176,7 +178,8 @@ public class TableWindow extends JFrame {
                         .addComponent(tableScrollPane2)
                         .addComponent(tableScrollPane3))
                 .addGroup(layout.createParallelGroup()
-                        .addComponent(okButton))
+                        .addComponent(okButton)
+                        .addComponent(resetButton))
         );
 
 
@@ -264,6 +267,7 @@ public class TableWindow extends JFrame {
                 System.out.println(Arrays.toString(data.getNumVector()));
                 System.out.println(Arrays.toString(data.getPriorities()));
                 System.out.println(Arrays.toString(data.getSumVector()));
+                okButton.setEnabled(false);
             } catch (Exception exception) {
                 new ErrorWindow(this, exception);
             }
@@ -304,6 +308,12 @@ public class TableWindow extends JFrame {
                 okButton.setEnabled(false);
             }
 
+
+        });
+
+        resetButton.addActionListener(evt -> {
+            this.dispose();
+            new GraphicInterface();
 
         });
 
