@@ -15,6 +15,7 @@ public class ResultWindow extends JDialog {
     ArrayList<Double> intervals;
 
     JTable resultTable = new JTable(resultModel);
+    JScrollPane tableScrollPanel = new JScrollPane(resultTable);
 
     public ResultWindow(ArrayList<Double> result, ArrayList<Double> intervals) {
         setSize(550, 200);
@@ -22,9 +23,9 @@ public class ResultWindow extends JDialog {
         this.result = result;
         this.intervals = intervals;
 
-        Container cp = getContentPane();
+        //Container cp = getContentPane();
 
-        cp.setLayout(new FlowLayout());
+        //cp.setLayout(new FlowLayout());
         setLocationRelativeTo(null);
 
         UnsortedToSorted objectSorted = new UnsortedToSorted(result, intervals);
@@ -51,9 +52,9 @@ public class ResultWindow extends JDialog {
 
 
         resultTable.setRowHeight(30);
+        compose();
 
-        JScrollPane tableScrollPanel = new JScrollPane(resultTable);
-        cp.add(tableScrollPanel);
+        //cp.add(tableScrollPanel);
         setModal(true);
         resultTable.setEnabled(false);
         setVisible(true);
@@ -76,6 +77,19 @@ public class ResultWindow extends JDialog {
             vector.add(String.valueOf(anInt));
         }
         return vector;
+    }
+
+    private void compose() {
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.CENTER)
+                .addComponent(tableScrollPanel));
+
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addComponent(tableScrollPanel));
+
     }
 
 
