@@ -87,26 +87,6 @@ public class TableWindow extends JFrame {
             object.add(i + 1 + "");
         }
         model1.addColumn("  Объекты  ", object);
-/*
-        for (int i = 0; i < countOfObject; i++) {
-            Vector<String> object = new Vector<>();
-            for (int j = 0; j < countOfParameters; j++) {
-                object.add(" ");
-            }
-            model1.addRow(object);
-        }
-
- */
-        /*
-        for (int i = 0; i < countOfObject; i++) {
-            for (int j = 0; j < countOfParameters; j++) {
-
-            }
-            model1.addRow(object);
-        }
-
-         */
-
 
         Vector<String> vectorCriteria = new Vector<>();
         for (int i = 0; i < countOfParameters; i++) {
@@ -170,7 +150,7 @@ public class TableWindow extends JFrame {
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup()
                         .addComponent(kLabel)
-                        .addComponent(maxParameters)
+                        .addComponent(maxParameters, 0, GroupLayout.DEFAULT_SIZE, 20)
                         .addComponent(setButton))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(tableScrollPane1)
