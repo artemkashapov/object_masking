@@ -121,7 +121,7 @@ public class TableWindow extends JFrame {
         compose();
         addButtonListeners();
 
-        setSize(750, 400);
+        setSize(800, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);

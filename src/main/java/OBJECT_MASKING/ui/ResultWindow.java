@@ -18,7 +18,9 @@ public class ResultWindow extends JDialog {
     JScrollPane tableScrollPanel = new JScrollPane(resultTable);
 
     public ResultWindow(ArrayList<Double> result, ArrayList<Double> intervals) {
-        setSize(550, 200);
+
+        int width = result.size()*300;
+        setSize(width, 200);
 
         this.result = result;
         this.intervals = intervals;
